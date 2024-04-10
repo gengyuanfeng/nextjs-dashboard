@@ -1,5 +1,6 @@
 {
   "private": true,
+  "middleware": "./middleware.js",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
