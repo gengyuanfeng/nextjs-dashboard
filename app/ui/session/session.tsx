@@ -1,8 +1,24 @@
-"use server"
+'use server';
 import { auth } from '@/auth';
-import { GetServerSideProps } from 'next';
+import { GetServerSideProps, NextPageContext } from 'next';
+import { parseCookies } from 'nookies'
+import { cookies } from 'next/headers'
 export default async function SessionCard(props: any) {
-  return <div>{JSON.stringify(props)}</div>;
+  const session = await auth();
+  const all = parseCookies();
+  const cookieStore = cookies()
+  const theme = cookieStore.get('userId')
+  return (
+    <div>
+      props:{JSON.stringify(props)}
+      <br />
+      session:{JSON.stringify(session)}
+      <br />
+      all:{JSON.stringify(all)}
+      <br />
+      theme:{JSON.stringify(theme)}
+    </div>
+  );
 }
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await auth(context);
@@ -12,8 +28,15 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   if (session) {
     // Do something with the session
-    return { props: { session,"b":"b" } };
+    return { props: { session, b: 'b' } };
   }
 
-  return { props: {"a":"a"} };
+  return { props: { a: 'a' } };
+};
+SessionCard.getInitialProps = async ({ req }: NextPageContext): Promise<any> => {
+  console.log('=====getInitialProps=====');
+  console.log("getInitialProps");
+  console.log('=====getInitialProps=====');
+  const data = req ? 'Data from server' : 'Data from client';
+  return { data };
 };

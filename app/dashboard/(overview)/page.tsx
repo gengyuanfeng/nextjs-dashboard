@@ -7,6 +7,7 @@ import { Suspense } from 'react';
 import { RevenueChartSkeleton,LatestInvoicesSkeleton,CardsSkeleton } from '@/app/ui/skeletons';
 import CardWrapper from '@/app/ui/dashboard/cards';
 import SessionCard from '@/app/ui/session/session';
+import SessionCardCliend from '@/app/ui/session/session-client';
 
 export default async function Page() {
   const {
@@ -21,6 +22,7 @@ export default async function Page() {
         仪表板
       </h1>
       <SessionCard></SessionCard>
+      {/* <SessionCardCliend></SessionCardCliend> */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
       <Suspense fallback={<CardsSkeleton />}>
           <CardWrapper />
