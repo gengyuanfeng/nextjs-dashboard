@@ -1,5 +1,5 @@
 'use client';
-
+import type { NextRequest } from 'next/server';
 import { lusitana } from '@/app/ui/fonts';
 import {
   AtSymbolIcon,
