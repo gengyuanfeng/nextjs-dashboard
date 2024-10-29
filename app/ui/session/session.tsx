@@ -1,13 +1,13 @@
 'use server';
 import { auth } from '@/auth';
-import { GetServerSideProps, NextPageContext } from 'next';
+import { GetServerSideProps, InferGetServerSidePropsType, NextPageContext } from 'next';
 import { parseCookies } from 'nookies'
 import { cookies } from 'next/headers'
 export default async function SessionCard(props: any) {
   const session = await auth();
   const all = parseCookies();
   const cookieStore = cookies()
-  const theme = cookieStore.get('userId')
+  const theme = cookieStore.get('authjs.session-token')
   return (
     <div>
       props:{JSON.stringify(props)}
